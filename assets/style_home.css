@@ -1,0 +1,43 @@
+body {
+	background:linear-gradient(#22abe9 100%,#36caf0 100%);
+}
+#container {
+	width: 90%;
+	margin: 50px auto;
+	background-color: white;
+}
+#header {
+	padding: 10px
+}
+.nav {
+	float:right;
+	margin-top: -45px;
+}
+
+#header a {
+	margin-right: 10px;
+}
+#reviews {
+	width:30%;
+	margin-left:5%;
+	margin-right:15%;
+	display: inline-block;
+}
+.reviewed_books {
+	display: inline-block;
+	width: 100%;
+	margin-left: 15%;
+	overflow: auto;
+	vertical-align: top;
+	height: 200px;
+	border:1px dashed gray;
+	padding: 10px;
+	margin-top: 20px;
+}
+#reviewed {
+	display: inline-block;
+	width: 20%;
+	vertical-align: top;
+}
+h3 {
+}

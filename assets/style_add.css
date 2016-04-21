@@ -1,0 +1,27 @@
+body {
+	background:linear-gradient(#22abe9 100%,#36caf0 100%);
+}
+#container {
+	width: 90%;
+	margin: 50px auto;
+	background-color: white;
+	padding: 10px;
+}
+#header {
+	margin-top: 30px;
+}
+.nav {
+	float:right;
+	margin-top: -40px;
+}
+input, textarea, label {
+	display: block;
+	margin-bottom: 10px;
+}
+form {
+	margin-left: 5%;
+}
+textarea {
+	width: 225px;
+	height:100px;
+}
