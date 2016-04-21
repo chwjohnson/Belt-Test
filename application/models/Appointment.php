@@ -12,15 +12,27 @@ class Appointment extends CI_Model {
 		}
 		else {
 			if ($post['date'] >= date('Y-m-d')) {
-				$query = "INSERT INTO appointments (date,time,created_at,updated_at,user_id,status,task) VALUES (?,?,NOW(),NOW(),?,'pending',?)";
-				$values = array(
+				$check = "SELECT * FROM appointments WHERE date = ? AND time = ?";
+				$check_val = array(
 					$post['date'],
-					$post['time'],
-					$this->session->userdata('id'),
-					$post['task']
+					$post['time']
 					);
-				$this->db->query($query,$values);
-				return true;
+				$check_result = $this->db->query($check,$check_val)->result_array();
+				if (count($check_result) == 0){
+					$query = "INSERT INTO appointments (date,time,created_at,updated_at,user_id,status,task) VALUES (?,?,NOW(),NOW(),?,'pending',?)";
+					$values = array(
+						$post['date'],
+						$post['time'],
+						$this->session->userdata('id'),
+						$post['task']
+						);
+					$this->db->query($query,$values);
+					return true;
+				}
+				else {
+					$this->session->set_userdata('error', 'Date is not valid');
+					return false;
+				}
 			}
 			else {
 				$this->session->set_userdata('error', 'Date is not valid');
@@ -52,8 +64,6 @@ class Appointment extends CI_Model {
 					$post['time']
 					);
 				$check_result = $this->db->query($check,$check_val)->result_array();
-				var_dump($check_result);
-				die();
 				if (count($check_result) == 0){
 					$query = "UPDATE appointments SET appointments.date = ?, appointments.time = ?, appointments.status = ?, appointments.task = ? WHERE id= ?";
 					$values = array(
