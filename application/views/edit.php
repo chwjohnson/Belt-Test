@@ -12,62 +12,27 @@
 			<div id="header">
 				<h2>Hello <?= $this->session->userdata('first_name') ?></h2>
 				<div class="nav">
+					<a href="/Logins/">Dashboard</a>
 					<a href="/Logins/logout">Logout</a>
 				</div>
 			</div>
 			<hr>
-			<h3>Here are your appointments for today:</h3>
-			<table class="table">
-				<tr>
-					<th>Tasks</th>
-					<th>Time</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-				<?php
-					foreach ($result as $value2) {
-						if($value2['date'] == date('Y-m-d')) {
-							echo "<tr><td>";
-							echo $value2['task']."</td><td>".$value2['time']."</td><td>".$value2['status']."</td><td>";
-							if($value2['status'] != 'Done') {
-								echo "<a href='/Appointments/edit/".$value2['id']."'>Edit </a><a href='/Appointments/destroy/".$value2['id']."'> Delete</a>";
-							}
-							echo "</td></tr>";
-						}
-					}
-				?>
-			</table>
-			<h3>Your other appointments:</h3>
-			<table class="table">
-				<tr>
-					<th>Tasks</th>
-					<th>Date</th>
-					<th>Time</th>
-				</tr>
-				<?php 
-					foreach ($result as $value) {
-						if($value['date'] != date('Y-m-d')) {
-							if( strtotime($value['date']) < strtotime('now') ) {
-							}
-							else{
-								echo "<tr><td>";
-								echo $value['task']."</td><td>".$value['date']."</td><td>".$value['time'];
-								echo "</td></tr>";
-							}
-						}
-					}
-				?>
-			</table>
 			<?php
 			 echo "<p class='error'>".$this->session->userdata('error')."</p>";
 				$this->session->unset_userdata('error');
 			 ?>	
 			<?php echo validation_errors('<div class="error">', '</div>'); ?>
-			<form action="/Appointments/create" method="post">
+			<form action="/Appointments/edit_appt/<?php echo $id ?>" method="post">
+				<label>Tasks: </label><input type="text" name="task">
+				<label>Status: </label>
+				<select name="status">
+					<option value="Pending">Pending</option>
+					<option value="Missed">Missed</option>
+					<option value="Done">Done</option>
+				</select>
 				<label>Date: </label><input type="date" name="date">
 				<label>Time: </label><input type="time" name="time">
-				<label>Tasks: </label><input type="text" name="task">
-				<input type="submit" value="Add">
+				<input type="submit" value="Update">
 			</form>
 		</div>
 	</body>

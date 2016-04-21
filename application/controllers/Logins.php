@@ -11,8 +11,8 @@ class Logins extends CI_Controller {
 			$this->load->view('user_login');
 		}
 		else {
-			$this->load->model('Book');
-			$result = $this->Book->home();
+			$this->load->model('Appointment');
+			$result = $this->Appointment->home();
 			$this->load->view('home',array('result'=>$result));
 		}
 		

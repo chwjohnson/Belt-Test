@@ -9,7 +9,7 @@
 	</head>
 	<body>
 	<div id="container">
-		<h1>Book Review Central</h1>
+		<h1>Appointment Manager</h1>
 			<div class='register'>
 				<h3>Register</h3>
 				<form action='/Logins/register' method='post'>
@@ -21,8 +21,6 @@
 					First Name: <input type='text' name='first_name'  value="<?php echo set_value('first_name'); ?>">
 					<?php echo form_error('last_name'); ?>
 					Last Name: <input type='text' name='last_name' value="<?php echo set_value('last_name'); ?>">
-					<?php echo form_error('alias'); ?>
-					Alias: <input type='text' name='alias' value="<?php echo set_value('alias'); ?>">
 					<?php echo form_error('email'); ?>
 					Email: <input type='email' name='email' value="<?php echo set_value('email'); ?>">
 					<?php echo form_error('password'); ?>

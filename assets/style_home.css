@@ -39,5 +39,6 @@ body {
 	width: 20%;
 	vertical-align: top;
 }
-h3 {
+.error {
+	color: red;
 }

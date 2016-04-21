@@ -27,23 +27,21 @@ class Login extends CI_Model {
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|max_length[45]');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|max_length[45]');
-		$this->form_validation->set_rules('alias', 'Alias', 'trim|required|alpha_dash|max_length[45]|is_unique[users.alias]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|max_length[45]|matches[confirm_password]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[45]|matches[confirm_password]');
 		$this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'trim|required');
 		if ($this->form_validation->run() == FALSE){
 			return FALSE;
 		}
 		else {
-			$query = "INSERT INTO users (first_name, last_name, alias, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?,?, NOW(),NOW())";
+			$query = "INSERT INTO users (first_name, last_name, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?, NOW(),NOW())";
 			$salt = bin2hex(openssl_random_pseudo_bytes(22));
 			$old_password = $post['password'];
 			$password = md5($old_password . '' . $salt);
 			$first = $post['first_name'];
 			$last = $post['last_name'];
 			$email = $post['email'];
-			$alias = $post['alias'];
-			$user_info = array('first_name'=>$first,'last_name'=>$last,'alias'=>$alias,'email'=>$email,'password'=>$password,'salt'=>$salt);
+			$user_info = array('first_name'=>$first,'last_name'=>$last,'email'=>$email,'password'=>$password,'salt'=>$salt);
 			$this->db->query($query, $user_info);
 			return TRUE;
 		}
