@@ -12,10 +12,11 @@ class Appointment extends CI_Model {
 		}
 		else {
 			if ($post['date'] >= date('Y-m-d')) {
-				$check = "SELECT * FROM appointments WHERE date = ? AND time = ?";
+				$check = "SELECT * FROM appointments WHERE date = ? AND time = ? AND user_id = ?";
 				$check_val = array(
 					$post['date'],
-					$post['time']
+					$post['time'],
+					$this->session->userdata('id')
 					);
 				$check_result = $this->db->query($check,$check_val)->result_array();
 				if (count($check_result) == 0){
@@ -58,10 +59,11 @@ class Appointment extends CI_Model {
 		}
 		else {
 			if ($post['date'] >= date('Y-m-d')) {
-				$check = "SELECT * FROM appointments WHERE date = ? AND time = ?";
+				$check = "SELECT * FROM appointments WHERE date = ? AND time = ? AND user_id = ?";
 				$check_val = array(
 					$post['date'],
-					$post['time']
+					$post['time'],
+					$this->session->userdata('id')
 					);
 				$check_result = $this->db->query($check,$check_val)->result_array();
 				if (count($check_result) == 0){
