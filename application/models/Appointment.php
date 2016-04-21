@@ -52,6 +52,8 @@ class Appointment extends CI_Model {
 					$post['time']
 					);
 				$check_result = $this->db->query($check,$check_val)->result_array();
+				var_dump($check_result);
+				die();
 				if (count($check_result) == 0){
 					$query = "UPDATE appointments SET appointments.date = ?, appointments.time = ?, appointments.status = ?, appointments.task = ? WHERE id= ?";
 					$values = array(
