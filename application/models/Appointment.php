@@ -46,16 +46,28 @@ class Appointment extends CI_Model {
 		}
 		else {
 			if ($post['date'] >= date('Y-m-d')) {
-				$query = "UPDATE appointments SET appointments.date = ?, appointments.time = ?, appointments.status = ?, appointments.task = ? WHERE id= ?";
-				$values = array(
+				$check = "SELECT * FROM appointments WHERE date = ? AND time = ?";
+				$check_val = array(
 					$post['date'],
-					$post['time'],
-					$post['status'],
-					$post['task'],
-					$id
+					$post['time']
 					);
-				$this->db->query($query,$values);
-				return true;
+				$check_result = $this->db->query($check,$check_val)->result_array();
+				if (count($check_result) == 0){
+					$query = "UPDATE appointments SET appointments.date = ?, appointments.time = ?, appointments.status = ?, appointments.task = ? WHERE id= ?";
+					$values = array(
+						$post['date'],
+						$post['time'],
+						$post['status'],
+						$post['task'],
+						$id
+						);
+					$this->db->query($query,$values);
+					return true;
+				}
+				else {
+					$this->session->set_userdata('error', 'Date is not valid');
+					return false;
+				}
 			}
 			else {
 				$this->session->set_userdata('error', 'Date is not valid');
