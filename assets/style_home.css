@@ -43,3 +43,6 @@ body {
 .error {
 	color: red;
 }
+label {
+	display: block;
+}
