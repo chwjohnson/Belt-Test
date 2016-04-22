@@ -23,13 +23,10 @@ class Appointments extends CI_Controller {
 		redirect('/');
 	}
 	public function edit($id){
-		if ($this->session->userdata('login')==true) {
-			$result = $this->Appointment->prepopulate($id);
+		$this->logged_in_check();
+		$result = $this->Appointment->prepopulate($id);
 		$this->load->view('edit',array('id'=>$id, 'result'=>$result));
-		}
-		else {
-			redirect('/');
-		}
+		
 	}
 	public function edit_appt($id){
 		$result = $this->Appointment->db_edit_appt($id,$this->input->post());
@@ -38,6 +35,11 @@ class Appointments extends CI_Controller {
 		}
 		else {
 			$this->load->view('edit',array('id'=>$id));
+		}
+	}
+	public function logged_in_check(){
+		if (!$this->session->userdata('login')==true) {
+			redirect('/');
 		}
 	}
 }
