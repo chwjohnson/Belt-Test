@@ -9,7 +9,7 @@ class Appointments extends CI_Controller {
 	public function create() {
 		$result = $this->Appointment->db_create($this->input->post());
 		if ($result) {
-			redirect('/');
+			redirect('/logins');
 		}
 		else {
 			$result = $this->Appointment->home();

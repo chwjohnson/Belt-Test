@@ -22,12 +22,7 @@ class Logins extends CI_Controller {
 	}
 	public function login_process(){
 		$result = $this->Login->db_login($this->input->post());
-		if ($this->session->userdata('login') == TRUE) {
-			redirect('/');
-		}
-		else {
-			redirect('/');
-		}
+		redirect('/');
 	}
 	public function register(){
 		$result = $this->Login->db_register($this->input->post());
