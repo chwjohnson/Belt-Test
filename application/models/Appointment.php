@@ -89,4 +89,8 @@ class Appointment extends CI_Model {
 			}
 		}
 	}
+	public function prepopulate($id) {
+		$query = "SELECT * FROM appointments WHERE appointments.id = ?";
+		return $this->db->query($query,$id)->row_array();
+	}
 }

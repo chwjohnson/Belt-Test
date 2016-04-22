@@ -26,15 +26,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 ?>	
 			<?php echo validation_errors('<div class="error">', '</div>'); ?>
 			<form action="/Appointments/edit_appt/<?php echo $id ?>" method="post">
-				<label>Tasks: </label><input type="text" name="task">
+				<label>Tasks: </label><input type="text" name="task" value="<?= $result['task'] ?>">
 				<label>Status: </label>
 				<select name="status">
 					<option value="Pending">Pending</option>
 					<option value="Missed">Missed</option>
 					<option value="Done">Done</option>
 				</select>
-				<label>Date: </label><input type="date" name="date">
-				<label>Time: </label><input type="time" name="time">
+				<label>Date: </label><input type="date" name="date" value="<?= $result['date'] ?>">
+				<label>Time: </label><input type="time" name="time" value="<?= $result['time'] ?>">
 				<input type="submit" value="Update">
 			</form>
 		</div>

@@ -23,7 +23,8 @@ class Appointments extends CI_Controller {
 		redirect('/');
 	}
 	public function edit($id){
-		$this->load->view('edit',array('id'=>$id));
+		$result = $this->Appointment->prepopulate($id);
+		$this->load->view('edit',array('id'=>$id, 'result'=>$result));
 	}
 	public function edit_appt($id){
 		$result = $this->Appointment->db_edit_appt($id,$this->input->post());
